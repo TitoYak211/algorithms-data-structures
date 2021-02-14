@@ -6,3 +6,14 @@ graph = {'A': set(['B', 'C']),
          'E': set(['B', 'F']),
          'F': set(['C', 'E'])}
 
+# dfs
+# uses the stack data-structure to build-up and return a set of vertices that are accessible within the subjects connected component
+def dfs(graph, start):
+    visited, stack = set(), [start]
+    while stack:
+        vertex = stack.pop()
+        if vertex not in visited:
+            visited.add(vertex)
+            # remove items from a set, we are able to add only the unvisited adjacent vertices
+            stack.extend(graph[vertex] - visited)
+    return visited
