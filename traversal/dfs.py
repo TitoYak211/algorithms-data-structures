@@ -27,3 +27,14 @@ def dfs(graph, start, visited=None):
     for nxt in graph[start] - visited:
         dfs(graph, nxt, visited)
     return visited
+
+# Paths
+def dfs_paths(graph, start, goal):
+    stack = [(start, [start])]
+    while stack:
+        (vertex, path) = stack.pop()
+        for nxt in graph[vertex] - set(path):
+            if nxt == goal:
+                yield path + [nxt]
+            else:
+                stack.append((nxt, path + [nxt]))
